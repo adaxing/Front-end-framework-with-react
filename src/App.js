@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Navbar, NavbarBrand } from 'reactstrap';
 import './App.css';
 
+import { DISHES } from './components/SharedComponent/Dish';
+import Menu from './components/MenuComponent/Menu';
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dish : DISHES
+    }
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Navbar color="light" light expand="md">
+          <div className='container'>
+            <NavbarBrand href='/'>Confusion Rest</NavbarBrand>   
+          </div>
+        </Navbar>
+        <Menu dishes={this.state.dish}/>
       </div>
     );
   }
