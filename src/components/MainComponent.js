@@ -27,8 +27,11 @@ class Main extends Component {
                         <NavbarBrand href='/'>Confusion Rest</NavbarBrand>   
                     </div>
                 </Navbar>
-                <Menu dishes={this.state.dish} onClick={(dishId)=> this.onDishSelect(dishId)} />
-                <DishDetail selected={this.state.dish.filter( (dish)=> dish.id === this.state.selected)[0]} />
+                <div className='container'>
+                    <Menu dishes={this.state.dish} onClick={(dishId)=> this.onDishSelect(dishId)} />
+                    <hr/>
+                    <DishDetail selected={this.state.dish.filter( (dish)=> dish.id === this.state.selected)[0]} />
+                </div>
             </div>
         );
     }
