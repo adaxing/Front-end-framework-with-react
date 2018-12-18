@@ -12,6 +12,17 @@ class DishDetail extends Component {
         
         this.displayDish = this.displayDish.bind(this);
         this.renderComments = this.renderComments.bind(this);
+        console.log('Dish component constructor is invoked')
+    }
+    componentDidMount(){
+        console.log('Dish component ComponentDidMount is invoked')
+    }
+    componentWillMount(){
+        console.log('Dish component ComponenWillMount is invoked')
+    }
+    componentWillUpdate(){
+        console.log('Dish component ComponenWillUpdate is invoked')
+
     }
     displayDish(dish) {
         if (dish) {
@@ -33,7 +44,12 @@ class DishDetail extends Component {
                     return (
                         <div key={c.author}>
                             <p>{c.comment}</p>
-                            <p>--{c.author}, {c.date}</p>
+                            <p> --{c.author}, {new Intl.DateTimeFormat('en-US',{
+                                                                                year: 'numeric',
+                                                                                month: 'short',
+                                                                                day: '2-digit'
+                                                                                }).format( new Date(Date.parse(c.date)))}
+                            </p>
                         </div>
                     )
                 })
@@ -42,6 +58,7 @@ class DishDetail extends Component {
     }
 
     render () {
+        console.log('Dish component render is invoked')
         if (this.props.selected) {
             return (
                 <div className='row'>
