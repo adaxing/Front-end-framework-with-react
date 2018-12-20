@@ -3,7 +3,10 @@ import { Card,
     CardImg,
     CardTitle,
     CardBody,
-    CardText } from 'reactstrap';
+    CardText,
+    Breadcrumb,
+    BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
     function DisplayDish({dish}) {
         if (dish) {
@@ -21,7 +24,7 @@ import { Card,
     function RenderComments({comment}) {
         if (comment) {
             return (
-                comment.comments.map( (c)=> {
+                comment.map( (c)=> {
                     return (
                         <div key={c.author}>
                             <p>{c.comment}</p>
@@ -39,16 +42,30 @@ import { Card,
     }
 
     const DishDetail = (props) => {
-        if (props.selected) {
+        if (props) {
             return (
-                <div className='row'>
-                    <div className='col-12 col-md-5 m-1'>
-                        <DisplayDish dish={props.selected} />
+                <div className='container'>
+                    <div className='row'>
+                        <Breadcrumb>
+                            <BreadcrumbItem><Link to='/menu'>Menu</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                        </Breadcrumb>
+                        <div className='col-12'>
+                            <h3>{props.dish.name}</h3>
+                            <hr />
+                        </div>
                     </div>
-                    <div className='col-12 col-md-5 m-1'>
-                        <h4>Comments</h4>
-                        <RenderComments comment={props.selected} />
+                    <div className='row'>
+                        <div className='col-12 col-md-5 m-1'>
+                            <DisplayDish dish={props.dish} />
+                        </div>
+                        <div className='col-12 col-md-5 m-1'>
+                            <h4>Comments</h4>
+                            <RenderComments comment={props.comment} />
+                        </div>
                     </div>
+                    <br/>
+                    <hr/>
                 </div>
             )
         } else {
