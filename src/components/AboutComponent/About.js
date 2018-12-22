@@ -30,8 +30,6 @@ function RenderLeader({leaders}) {
 
 
 function About(props) {
-
-    console.log(props);
     return(
         <div className="container">
             <div className="row">
