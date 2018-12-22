@@ -4,13 +4,13 @@ import { LEADERS } from '../components/SharedComponent/Leaders';
 import { PROMOTIONS } from '../components/SharedComponent/Promotions';
 
 
-export const InitialStore = {
+export const initialState = {
     dishes : DISHES,
     comments: COMMENTS,
     promotions: PROMOTIONS,
     leaders: LEADERS
 }
 
-export const Reducer = (store = InitialStore, action) => {
-    return store
+export const Reducer = (state = initialState, action) => {
+    return state
 }

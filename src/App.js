@@ -4,14 +4,11 @@ import './App.css';
 import Main from './components/MainComponent';
 import { BrowserRouter } from 'react-router-dom';
 
-import { Reducer, InitialStore } from './redux/Reducer';
-
-import { createStore } from 'redux';
+import { ConfigStore } from './redux/ConfigStore';
 import { Provider } from 'react-redux';
 
-const store = createStore (
-  Reducer, InitialStore
-);
+
+const store = ConfigStore();
 
 class App extends Component {
   
