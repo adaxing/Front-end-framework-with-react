@@ -7,6 +7,7 @@ import { Card,
     Breadcrumb,
     BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import CommentForm from '../CommentComponent/Comment';
 
     function DisplayDish({dish}) {
         if (dish) {
@@ -22,6 +23,7 @@ import { Link } from 'react-router-dom';
         } 
     }
     function RenderComments({comment}) {
+    
         if (comment) {
             return (
                 comment.map( (c)=> {
@@ -62,6 +64,7 @@ import { Link } from 'react-router-dom';
                         <div className='col-12 col-md-5 m-1'>
                             <h4>Comments</h4>
                             <RenderComments comment={props.comment} />
+                            <CommentForm />
                         </div>
                     </div>
                     <br/>
