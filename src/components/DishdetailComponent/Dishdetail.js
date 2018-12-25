@@ -45,6 +45,7 @@ import CommentForm from '../CommentComponent/Comment';
 
     const DishDetail = (props) => {
         if (props) {
+            console.log('In detail, ', props);
             return (
                 <div className='container'>
                     <div className='row'>
@@ -64,7 +65,7 @@ import CommentForm from '../CommentComponent/Comment';
                         <div className='col-12 col-md-5 m-1'>
                             <h4>Comments</h4>
                             <RenderComments comment={props.comment} />
-                            <CommentForm />
+                            <CommentForm dishId={props.dish.id} addComment={props.addComment}/>
                         </div>
                     </div>
                     <br/>
