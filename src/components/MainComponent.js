@@ -16,12 +16,13 @@ import Menu from './MenuComponent/Menu';
 import DishDetail  from './DishdetailComponent/Dishdetail';
 import Contact from './ContactComponent/Contact';
 
-import { addComment } from '../redux/ActionCreators';
+import { addComment, fetchDishes } from '../redux/ActionCreators';
 
 
 // dispatch action to props
 const mapDispatchToProps = dispatch => ({
-    addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId,rating, author, comment))
+    addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId,rating, author, comment)),
+    fetchDishes: () => {dispatch(fetchDishes())}
 })
 
 // retrieve state value from appjs by passing props 
@@ -36,15 +37,19 @@ const mapStateToProps = state => {
 
 
 class Main extends Component {
-    constructor(props) {
+    constructor(props){
         super(props);
     }
-
+    componentDidMount(){
+        this.props.fetchDishes();
+    }
     render() {
         const HomePage = () => {
             return (
                 <Home
-                    dish={this.props.dishes.filter((dish)=>dish.featured)[0]}
+                    dish={this.props.dishes.dishes.filter((dish)=>dish.featured)[0]}
+                    dishLoading={this.props.dishes.isLoading}
+                    dishErr={this.props.dishes.errMes}
                     promotion={this.props.promotions.filter((promo)=>promo.featured)[0]} 
                     leader={this.props.leaders.filter((leader)=>leader.featured)[0]}
                 />
@@ -59,7 +64,9 @@ class Main extends Component {
         const DishWithId = ({match}) => {
             return (
                 <DishDetail
-                    dish={this.props.dishes.filter((dish)=> dish.id === parseInt(match.params.dishId,10))[0]} 
+                    dish={this.props.dishes.dishes.filter((dish)=> dish.id === parseInt(match.params.dishId,10))[0]} 
+                    isLoading={this.props.dishes.isLoading}
+                    errMes={this.props.dishes.errMes}
                     comment={this.props.comments.filter((comment)=> comment.dishId === parseInt(match.params.dishId,10))}
                     addComment={this.props.addComment}
                 />

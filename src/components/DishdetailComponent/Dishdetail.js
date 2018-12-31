@@ -8,6 +8,7 @@ import { Card,
     BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from '../CommentComponent/Comment';
+import { Loading } from '../LoadingComponent/Loading';
 
     function DisplayDish({dish}) {
         if (dish) {
@@ -44,8 +45,25 @@ import CommentForm from '../CommentComponent/Comment';
     }
 
     const DishDetail = (props) => {
-        if (props) {
-            console.log('In detail, ', props);
+        if (props.isLoading) {
+            return (
+                <div className="container">
+                    <div className="row">
+                        <Loading />
+                    </div>
+                </div>
+            )
+        } 
+        else if (props.errMes) {
+            return (
+                <div className="container">
+                    <div className="row">
+                        <h4>{props.errMes}</h4>
+                    </div>
+                </div>
+            )
+        }
+        else if (props.dish) {
             return (
                 <div className='container'>
                     <div className='row'>
