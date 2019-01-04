@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { actions } from 'react-redux-form';
 // import { DISHES } from './SharedComponent/Dish';
 // import { COMMENTS } from './SharedComponent/Comments';
 // import { LEADERS } from './SharedComponent/Leaders';
@@ -22,7 +22,8 @@ import { addComment, fetchDishes } from '../redux/ActionCreators';
 // dispatch action to props
 const mapDispatchToProps = dispatch => ({
     addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId,rating, author, comment)),
-    fetchDishes: () => {dispatch(fetchDishes())}
+    fetchDishes: () => {dispatch(fetchDishes())},
+    resetFeedback: () => {dispatch(actions.reset('feedback'))}
 })
 
 // retrieve state value from appjs by passing props 
@@ -82,7 +83,7 @@ class Main extends Component {
                     <Route exact path="/aboutus" component={AboutPage} />
                     <Route exact path="/menu" component={ ()=><Menu dishes={this.props.dishes} /> } />
                     <Route path="/menu/:dishId" component={DishWithId} />
-                    <Route exact path="/contactus" component={Contact} />
+                    <Route exact path="/contactus" component={()=> <Contact resetFeedback={this.props.resetFeedback}/>} />
                     <Redirect to="/home" />
                 </Switch>
                 <br/>
