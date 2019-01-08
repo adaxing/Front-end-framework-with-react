@@ -1,18 +1,8 @@
 import * as ActionTypes from './ActionType';
-import { DISHES } from '../components/SharedComponent/Dish';
+import { baseUrl } from '../components/SharedComponent/baseUrl';
 
 // normal action creator returns action
 
-// addComment action
-export const addComment = (dishId, rating, author, comment) => ({
-    type: ActionTypes.ADD_COMMENT,
-    payload: {
-        dishId: dishId,
-        rating: rating,
-        author: author,
-        comment: comment
-    }
-}) 
 // addDish action
 export const addDishes = (dishes) => ({
     type: ActionTypes.ADD_DISHES,
@@ -33,8 +23,55 @@ export const dishFailed = (errMes) => ({
 // inner function receives the store methods dispatch and getState as parameters
 
 export const fetchDishes = () => (dispatch) => {
-    dispatch(dishLoading(true));
-    setTimeout( ()=>{
-        dispatch(addDishes(DISHES))
-    }, 2000)
+    dispatch(dishLoading());
+
+    return fetch(baseUrl+'dishes') 
+        .then(response => response.json())
+        .then(dishes => dispatch(addDishes(dishes)))
 }
+
+// Comment
+
+// addComment action
+export const addComment = (dishId, rating, author, comment) => ({
+    type: ActionTypes.ADD_COMMENT,
+    payload: {
+        dishId: dishId,
+        rating: rating,
+        author: author,
+        comment: comment
+    }
+}) 
+export const fetchComments = () => (dispatch) => {    
+    return fetch(baseUrl+'comments') 
+        .then(response => response.json())
+        .then(comments => dispatch(addComments(comments)))
+}
+export const addComments = (comments) => ({
+    type: ActionTypes.ADD_COMMENTS,
+    payload: comments
+}) 
+export const commentFailed = (errMes) => ({
+    type: ActionTypes.COMMENTS_FAILED,
+    payload: errMes
+})
+
+// Promotion
+export const fetchPromos = () => (dispatch) => {
+    dispatch(promoLoading());
+    return fetch(baseUrl+'promotions')
+        .then(response => response.json())
+        .then(promos => dispatch(addPromos(promos)))
+}
+
+export const promoLoading = () => ({
+    type: ActionTypes.PROMOS_LOADING
+})
+export const addPromos = (promotions) => ({
+    type: ActionTypes.ADD_PROMOS,
+    payload: promotions
+})
+export const promoFaild = (errMes) => ({
+    type: ActionTypes.PROMOS_FAILED,
+    payload: errMes
+})

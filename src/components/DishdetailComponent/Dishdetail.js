@@ -9,12 +9,13 @@ import { Card,
 import { Link } from 'react-router-dom';
 import CommentForm from '../CommentComponent/Comment';
 import { Loading } from '../LoadingComponent/Loading';
+import { baseUrl } from '../SharedComponent/baseUrl';
 
     function DisplayDish({dish}) {
         if (dish) {
             return (
                 <Card>
-                    <CardImg src={dish.image}/>
+                    <CardImg src={baseUrl + dish.image}/>
                     <CardBody>
                         <CardTitle>{dish.name}</CardTitle>
                         <CardText>{dish.description}</CardText>

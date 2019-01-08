@@ -8,12 +8,13 @@ import { Card,
 
 import { Link } from 'react-router-dom';
 import { Loading } from '../LoadingComponent/Loading';
+import { baseUrl } from '../SharedComponent/baseUrl';
 
     function DishesItem({dish, onClick}) {
         return (
             <Card>
                 <Link to={`/menu/${dish.id}`}>
-                    <CardImg width='100%' src={dish.image} alt={dish.name}/>
+                    <CardImg width='100%' src={baseUrl + dish.image} alt={dish.name}/>
                     <CardImgOverlay className='mr-5'>
                         <CardTitle>{dish.name}</CardTitle>
                     </CardImgOverlay>
