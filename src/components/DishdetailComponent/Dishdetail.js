@@ -65,6 +65,7 @@ import { baseUrl } from '../SharedComponent/baseUrl';
             )
         }
         else if (props.dish) {
+            console.log('In the dishDetail page, ', props)
             return (
                 <div className='container'>
                     <div className='row'>
@@ -84,7 +85,7 @@ import { baseUrl } from '../SharedComponent/baseUrl';
                         <div className='col-12 col-md-5 m-1'>
                             <h4>Comments</h4>
                             <RenderComments comment={props.comment} />
-                            <CommentForm dishId={props.dish.id} addComment={props.addComment}/>
+                            <CommentForm dishId={props.dish.id} postComment={props.postComment}/>
                         </div>
                     </div>
                     <br/>

@@ -16,12 +16,12 @@ import Menu from './MenuComponent/Menu';
 import DishDetail  from './DishdetailComponent/Dishdetail';
 import Contact from './ContactComponent/Contact';
 
-import { addComment, fetchDishes, fetchComments, fetchPromos } from '../redux/ActionCreators';
+import { postComment, fetchDishes, fetchComments, fetchPromos } from '../redux/ActionCreators';
 
 
 // dispatch action to props
 const mapDispatchToProps = dispatch => ({
-    addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId,rating, author, comment)),
+    postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId,rating, author, comment)),
     fetchDishes: () => {dispatch(fetchDishes())},
     resetFeedback: () => {dispatch(actions.reset('feedback'))},
     fetchComments: () => {dispatch(fetchComments())},
@@ -50,7 +50,6 @@ class Main extends Component {
     }
     render() {
         const HomePage = () => {
-            console.log('Props in home is: '+ this.props)
             return (
                 <Home
                     dish={this.props.dishes.dishes.filter((dish)=>dish.featured)[0]}
@@ -77,7 +76,7 @@ class Main extends Component {
                     errMes={this.props.dishes.errMes}
                     comment={this.props.comments.comments.filter((comment)=> comment.dishId === parseInt(match.params.dishId,10))}
                     commentErr={this.props.comments.errMes}
-                    addComment={this.props.addComment}
+                    postComment={this.props.postComment}
                 />
             )
         }
