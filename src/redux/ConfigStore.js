@@ -3,7 +3,7 @@ import { Leaders } from './Leaders';
 import { Comments } from './Comments';
 import { Promotions } from './Promotions';
 import { InitialFeedback } from './Form';
-
+import { Feedbacks } from './Feedback';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
@@ -17,6 +17,7 @@ export  const ConfigStore = () => {
             leaders: Leaders,
             comments: Comments,
             promotions: Promotions,
+            feedbacks: Feedbacks,
             ...createForms({
                 feedback: InitialFeedback
             })
