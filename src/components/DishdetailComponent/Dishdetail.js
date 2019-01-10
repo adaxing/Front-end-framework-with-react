@@ -10,17 +10,24 @@ import { Link } from 'react-router-dom';
 import CommentForm from '../CommentComponent/Comment';
 import { Loading } from '../LoadingComponent/Loading';
 import { baseUrl } from '../SharedComponent/baseUrl';
-
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
     function DisplayDish({dish}) {
         if (dish) {
             return (
-                <Card>
-                    <CardImg src={baseUrl + dish.image}/>
-                    <CardBody>
-                        <CardTitle>{dish.name}</CardTitle>
-                        <CardText>{dish.description}</CardText>
-                    </CardBody>
-                </Card>
+                <FadeTransform
+                    in
+                    transformProps={{
+                        exitTransform: 'scale(0.5) translateY(-50%)'
+                    }}
+                    >
+                    <Card>
+                        <CardImg src={baseUrl + dish.image}/>
+                        <CardBody>
+                            <CardTitle>{dish.name}</CardTitle>
+                            <CardText>{dish.description}</CardText>
+                        </CardBody>
+                    </Card>
+                </FadeTransform>
             )
         } 
     }
@@ -28,19 +35,23 @@ import { baseUrl } from '../SharedComponent/baseUrl';
     
         if (comment) {
             return (
-                comment.map( (c)=> {
-                    return (
-                        <div key={c.author}>
-                            <p>{c.comment}</p>
-                            <p> --{c.author}, {new Intl.DateTimeFormat('en-US',{
-                                                                                year: 'numeric',
-                                                                                month: 'short',
-                                                                                day: '2-digit'
-                                                                                }).format( new Date(Date.parse(c.date)))}
-                            </p>
-                        </div>
-                    )
-                })
+                <Stagger in>
+                    {comment.map( (c)=> {
+                        return (
+                            <Fade in>
+                                <div key={c.author}>
+                                    <p>{c.comment}</p>
+                                    <p> --{c.author}, {new Intl.DateTimeFormat('en-US',{
+                                                                                        year: 'numeric',
+                                                                                        month: 'short',
+                                                                                        day: '2-digit'
+                                                                                        }).format( new Date(Date.parse(c.date)))}
+                                    </p>
+                                </div>
+                            </Fade>
+                        )
+                    })}
+                </Stagger>
             )
         } 
     }
