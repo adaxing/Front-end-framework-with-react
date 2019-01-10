@@ -14,7 +14,6 @@ export const Comments = (state={
         case ActionTypes.ADD_COMMENT:
             var comment = action.payload;
             // concat() takes copy of orginal
-            console.log('CCCCC , ', comment)
             return {
                 ...state, isLoading: false, errMes: null, comments: state.comments.concat(comment)
             }
